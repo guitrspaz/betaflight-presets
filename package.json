@@ -1,0 +1,13 @@
+{
+  "name": "betaflight-presets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Focused Betaflight configuration presets",
+  "license": "GPL-3.0-or-later",
+  "engines": { "node": ">=22.18.0" },
+  "scripts": {
+    "build": "node indexer/indexer.js",
+    "check": "node indexer/check.js && node scripts/check-presets.mjs",
+    "test": "npm run check"
+  }
+}

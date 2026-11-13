@@ -1,0 +1,10 @@
+Indexer files in indexer/ are copied unchanged from betaflight/firmware-presets
+https://github.com/betaflight/firmware-presets/tree/bc81bff84cfd57c1a00c35cdda4f0f94a3dcaf1d/indexer
+Upstream revision: bc81bff84cfd57c1a00c35cdda4f0f94a3dcaf1d
+Licensed under GNU GPL version 3; see LICENSE.
+
+Validation parser in vendor/betaflight-app/PresetParser.ts is copied unchanged
+from betaflight/betaflight-configurator revision
+7828ea83a9f6817463bfaddd06d746bf00e85b51.
+https://github.com/betaflight/betaflight-configurator/blob/7828ea83a9f6817463bfaddd06d746bf00e85b51/src/components/tabs/presets/PresetsRepoIndexed/PresetParser.ts
+Its original GPL-3.0-or-later notice is preserved.

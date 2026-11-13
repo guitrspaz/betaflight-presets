@@ -1,0 +1,33 @@
+#$ TITLE: guitrspaz - Throttle mid 0.50 expo 0.35
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OTHER
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal
+#$ DESCRIPTION: Sets throttle midpoint to 0.50 and throttle expo to 0.35, matching the saved Betaflight 4.5.5 fleet configurations.
+#$ DESCRIPTION: Select exactly one destination rate profile (1-4); profile 1 is selected by default. Applying activates that profile. Throttle output limits and PID tuning remain unchanged.
+#$ WARNING: Changes throttle response and the active rate profile. Verify the selected profile before flight.
+#$ FORCE_OPTIONS_REVIEW: true
+
+#$ OPTION_GROUP BEGIN: (EXCLUSIVE) Destination rate profile
+    #$ OPTION BEGIN (CHECKED): Rate profile 1 (CLI 0)
+        rateprofile 0
+        set thr_mid = 50
+        set thr_expo = 35
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Rate profile 2 (CLI 1)
+        rateprofile 1
+        set thr_mid = 50
+        set thr_expo = 35
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Rate profile 3 (CLI 2)
+        rateprofile 2
+        set thr_mid = 50
+        set thr_expo = 35
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Rate profile 4 (CLI 3)
+        rateprofile 3
+        set thr_mid = 50
+        set thr_expo = 35
+    #$ OPTION END
+#$ OPTION_GROUP END

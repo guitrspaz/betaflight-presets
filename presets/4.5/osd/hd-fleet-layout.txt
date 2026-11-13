@@ -1,0 +1,102 @@
+#$ TITLE: guitrspaz - HD fleet OSD layout
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OSD
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal
+#$ DESCRIPTION: For an already working 53 x 20 HD MSP DisplayPort OSD on Betaflight 4.5.5. UARTs and video transport must already be configured.
+#$ DESCRIPTION: Sets imperial units, selects OSD profile 1, replaces every element position and its visibility across all three OSD profiles, and sets the camera frame dimensions. Existing OSD profile names remain.
+#$ DESCRIPTION: The base layout matches the saved F5, FlyLens 85 and Pavo20 layouts. The F6 option changes link quality, transmitter power, G-force, ready mode and remaining-time visibility to the saved F6 variant.
+#$ DESCRIPTION: Battery alarms, warning masks, timer definitions, post-flight statistics and sensor configuration remain aircraft-specific. GPS and current-related elements require working sensors.
+#$ WARNING: For 53 x 20 HD only. Back up all OSD profiles before applying; their element visibility will be replaced.
+#$ FORCE_OPTIONS_REVIEW: true
+
+set osd_units = IMPERIAL
+set osd_profile = 1
+set osd_vbat_pos = 2497
+set osd_rssi_pos = 482
+set osd_link_quality_pos = 3118
+set osd_link_tx_power_pos = 3111
+set osd_rssi_dbm_pos = 1071
+set osd_rsnr_pos = 1292
+set osd_tim_1_pos = 2152
+set osd_tim_2_pos = 2145
+set osd_remaining_time_estimate_pos = 225
+set osd_flymode_pos = 2113
+set osd_anti_gravity_pos = 234
+set osd_g_force_pos = 2305
+set osd_throttle_pos = 257
+set osd_vtx_channel_pos = 373
+set osd_crosshairs_pos = 2360
+set osd_ah_sbar_pos = 2361
+set osd_ah_pos = 2233
+set osd_current_pos = 2625
+set osd_mah_drawn_pos = 2593
+set osd_wh_drawn_pos = 584
+set osd_motor_diag_pos = 234
+set osd_craft_name_pos = 2081
+set osd_pilot_name_pos = 234
+set osd_gps_speed_pos = 2177
+set osd_gps_lon_pos = 3559
+set osd_gps_lat_pos = 3527
+set osd_gps_sats_pos = 3106
+set osd_home_dir_pos = 2407
+set osd_home_dist_pos = 2401
+set osd_flight_dist_pos = 2182
+set osd_compass_bar_pos = 2101
+set osd_altitude_pos = 18753
+set osd_pid_roll_pos = 234
+set osd_pid_pitch_pos = 234
+set osd_pid_yaw_pos = 234
+set osd_debug_pos = 234
+set osd_power_pos = 388
+set osd_pidrate_profile_pos = 577
+set osd_warnings_pos = 2491
+set osd_avg_cell_voltage_pos = 2529
+set osd_pit_ang_pos = 353
+set osd_rol_ang_pos = 262
+set osd_battery_usage_pos = 513
+set osd_disarmed_pos = 2478
+set osd_nheading_pos = 1297
+set osd_up_down_reference_pos = 205
+set osd_ready_mode_pos = 2231
+set osd_nvario_pos = 225
+set osd_esc_tmp_pos = 234
+set osd_esc_rpm_pos = 234
+set osd_esc_rpm_freq_pos = 234
+set osd_rtc_date_time_pos = 234
+set osd_adjustment_range_pos = 234
+set osd_flip_arrow_pos = 294
+set osd_core_temp_pos = 3207
+set osd_log_status_pos = 581
+set osd_stick_overlay_left_pos = 2523
+set osd_stick_overlay_right_pos = 2513
+set osd_rate_profile_name_pos = 234
+set osd_pid_profile_name_pos = 234
+set osd_profile_name_pos = 234
+set osd_rcchannels_pos = 234
+set osd_camera_frame_pos = 35
+set osd_efficiency_pos = 2599
+set osd_total_flights_pos = 234
+set osd_aux_pos = 234
+set osd_sys_goggle_voltage_pos = 234
+set osd_sys_vtx_voltage_pos = 234
+set osd_sys_bitrate_pos = 234
+set osd_sys_delay_pos = 234
+set osd_sys_distance_pos = 234
+set osd_sys_lq_pos = 3142
+set osd_sys_goggle_dvr_pos = 234
+set osd_sys_vtx_dvr_pos = 234
+set osd_sys_warnings_pos = 234
+set osd_sys_vtx_temp_pos = 3214
+set osd_sys_fan_speed_pos = 234
+set osd_camera_frame_width = 30
+set osd_camera_frame_height = 16
+
+#$ OPTION BEGIN (UNCHECKED): F6 display variant
+    set osd_link_quality_pos = 1070
+    set osd_link_tx_power_pos = 1063
+    set osd_remaining_time_estimate_pos = 2273
+    set osd_g_force_pos = 289
+    set osd_ready_mode_pos = 234
+#$ OPTION END

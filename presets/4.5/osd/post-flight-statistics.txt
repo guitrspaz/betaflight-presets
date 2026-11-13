@@ -1,0 +1,16 @@
+#$ TITLE: guitrspaz - Post-flight statistics
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OSD
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal
+#$ DESCRIPTION: Replaces the post-flight statistics selection and enables average cell voltage. Extracted from saved Betaflight 4.5.5 configurations.
+#$ DESCRIPTION: Base mask is 19156604 from F5, F6 and FlyLens 85. Select the Pavo20 option to add minimum link quality (mask 19287676). OSD layout and warning settings remain unchanged.
+#$ FORCE_OPTIONS_REVIEW: true
+
+set osd_stat_bitmask = 19156604
+set osd_stat_avg_cell_value = ON
+
+#$ OPTION BEGIN (UNCHECKED): Pavo20 post-flight statistics variant
+    set osd_stat_bitmask = 19287676
+#$ OPTION END

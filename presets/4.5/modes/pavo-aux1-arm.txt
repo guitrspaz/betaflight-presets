@@ -1,0 +1,37 @@
+#$ TITLE: guitrspaz - Pavo switches - AUX1 arm
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: MODES
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal
+#$ DESCRIPTION: Replaces ALL 20 mode ranges. Existing GPS Rescue, USER modes and other custom mode assignments are removed unless explicitly restored.
+#$ DESCRIPTION: AUX1 high: arm. AUX2 low/mid: Angle. AUX3 mid/high: prearm, high: turtle. AUX5 high: beeper. AUX1 means receiver channel 5; AUX2 means channel 6, and so on. Requires matching transmitter outputs and a working accelerometer for Angle.
+#$ DESCRIPTION: GPS Rescue on AUX4 high is optional and OFF by default. Enable it only on an aircraft with configured and verified GPS Rescue. Failsafe behavior and GPS Rescue parameters are not configured by this preset.
+#$ DESCRIPTION: Based on saved Betaflight 4.5.5 mode mappings. Physical switch names vary by radio model; confirm channels and ranges in Receiver and Modes with propellers removed.
+#$ WARNING: Replaces every mode range, including arming and GPS Rescue switch assignments. Confirm radio channel mapping, arm/prearm, beeper and turtle mode with propellers removed.
+#$ FORCE_OPTIONS_REVIEW: true
+
+aux 0 0 0 1700 2100 0 0
+aux 1 1 1 900 1700 0 0
+aux 2 36 2 1300 2100 0 0
+aux 3 35 2 1700 2100 0 0
+aux 4 13 4 1700 2100 0 0
+aux 5 0 0 900 900 0 0
+aux 6 0 0 900 900 0 0
+aux 7 0 0 900 900 0 0
+aux 8 0 0 900 900 0 0
+aux 9 0 0 900 900 0 0
+aux 10 0 0 900 900 0 0
+aux 11 0 0 900 900 0 0
+aux 12 0 0 900 900 0 0
+aux 13 0 0 900 900 0 0
+aux 14 0 0 900 900 0 0
+aux 15 0 0 900 900 0 0
+aux 16 0 0 900 900 0 0
+aux 17 0 0 900 900 0 0
+aux 18 0 0 900 900 0 0
+aux 19 0 0 900 900 0 0
+
+#$ OPTION BEGIN (UNCHECKED): Add GPS Rescue on AUX4 high
+    aux 5 46 3 1700 2100 0 0
+#$ OPTION END
