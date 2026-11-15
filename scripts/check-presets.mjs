@@ -87,6 +87,13 @@ for (const entry of index.presets) {
         assert.deepEqual([...result.modes.values()], expected, `Saved assignments differ for ${checked[0]}`);
         assert.equal(cli.filter((line) => /^aux \d+ 0 \d+ 1700 2100/.test(line)).length, 1, 'Exactly one arm range');
       }
+    } else if (name === 'gps/enable-galileo.txt') {
+      assert.equal(cli.length, 1, 'Galileo preset must emit only its one setting');
+      assert.equal(preset.options.length, 0);
+      assert.deepEqual(result.settings, { gps_ublox_use_galileo: 'ON' });
+      assert.equal(result.selected, null);
+      assert.equal(result.modes.size, 0);
+      result.profiles.forEach((profile) => assert.deepEqual(profile, {}));
     } else {
       assert.equal(result.selected, null);
       assert.equal(result.modes.size, 0);

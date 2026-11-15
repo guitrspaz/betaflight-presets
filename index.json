@@ -147,12 +147,33 @@
     ],
     "keywords": [
       "fleet",
+      "Galileo",
+      "GPS",
       "guitrspaz",
       "personal",
       "timers"
     ]
   },
   "presets": [
+    {
+      "fullPath": "presets/4.5/gps/enable-galileo.txt",
+      "hash": "5e9fa859fcf60b6e17f6c408b025a3a30bb3d648974077c5666956eedb09b910",
+      "title": "guitrspaz - GPS - enable Galileo",
+      "firmware_version": [
+        "4.5"
+      ],
+      "category": "OTHER",
+      "status": "EXPERIMENTAL",
+      "author": "guitrspaz",
+      "keywords": [
+        "guitrspaz",
+        "fleet",
+        "personal",
+        "GPS",
+        "Galileo"
+      ],
+      "priority": 0
+    },
     {
       "fullPath": "presets/4.5/modes/dji-aux4-arm.txt",
       "hash": "79b8c12cb2af0e67b596642bd05e22bb16cc48d7e799ad2763a122f17a93460d",

@@ -1,0 +1,11 @@
+#$ TITLE: guitrspaz - GPS - enable Galileo
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OTHER
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal, GPS, Galileo
+#$ DESCRIPTION: Enables the Betaflight Galileo setting for an already working UBLOX GPS module that supports Galileo, with Auto Config already enabled. Intended for Betaflight 4.5.5.
+#$ DESCRIPTION: Changes only gps_ublox_use_galileo. GPS feature enablement, UART assignment, baud rate, other GPS settings, Rescue parameters, failsafe, modes and OSD remain unchanged. This does not configure a new GPS installation.
+#$ DESCRIPTION: After saving and restarting the flight controller and GPS module, verify GPS communication and an outdoor fix. Confirm module acceptance and compare acquisition, satellite count and fix quality before claiming an improvement.
+
+set gps_ublox_use_galileo = ON
