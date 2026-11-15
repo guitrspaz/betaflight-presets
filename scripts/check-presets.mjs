@@ -22,6 +22,12 @@ assert.deepEqual(index.presets.map((p) => p.fullPath).sort(), files('presets').s
 function commands(lines, checked) {
   return parser.removeUncheckedOptions(lines, checked).map((line) => line.trim()).filter((line) => line && !line.startsWith('#'));
 }
+function selections(options) {
+  return options.reduce((combinations, option) => {
+    const alternatives = option.isExclusive ? [[], ...option.childs.map((child) => [child.name])] : [[], [option.name]];
+    return combinations.flatMap((checked) => alternatives.map((choice) => [...checked, ...choice]));
+  }, [[]]);
+}
 function simulate(cli) {
   const result = { settings: {}, profiles: Array.from({ length: 4 }, () => ({})), modes: new Map(), selected: null };
   for (const line of cli) {
@@ -53,8 +59,7 @@ for (const entry of index.presets) {
   const preset = { ...entry };
   parser.readPresetProperties(preset, lines);
   const group = preset.options.find((option) => option.isExclusive);
-  const choices = group ? [[], ...group.childs.map((option) => [option.name])] : preset.options.reduce(
-    (combinations, option) => [...combinations, ...combinations.map((checked) => [...checked, option.name])], [[]]);
+  const choices = selections(preset.options);
   if (group) assert.equal(group.childs.filter((option) => option.checked).length, 1);
   for (const checked of choices) {
     const cli = commands(lines, checked);
@@ -99,14 +104,19 @@ for (const entry of index.presets) {
       assert.equal(result.selected, null);
       assert.equal(result.modes.size, 0);
       if (name === 'osd/hd-fleet-layout.txt') {
-        assert.deepEqual(preset.options.map((option) => option.name), ['F6 display variant', 'DJI control - hide transmitter power']);
-        assert(preset.options.every((option) => !option.checked), 'Layout variants must remain opt-in');
+        assert.deepEqual(preset.options.map((option) => option.name), ['F6 display variant', 'Control-link display']);
+        assert.equal(preset.options[0].checked, false, 'F6 layout must remain opt-in');
+        assert(group, 'Control-link overrides must be exclusive');
+        assert.deepEqual(group.childs.map((option) => option.name), ['Keep layout control-link display', 'DJI control - hide transmitter power', 'ELRS - RSSI dBm instead of transmitter power']);
+        assert.equal(group.childs.find((option) => option.checked).name, 'Keep layout control-link display', 'Default must retain existing control-link fields');
         const layout = checked.includes('F6 display variant') ? reference.f6Layout : reference.baseLayout;
-        const hideTxPower = checked.includes('DJI control - hide transmitter power');
+        const elrsSwap = checked.includes('ELRS - RSSI dBm instead of transmitter power');
+        const hideTxPower = checked.includes('DJI control - hide transmitter power') || elrsSwap;
         assert.deepEqual(result.settings, {
           osd_units: 'IMPERIAL', osd_profile: '1', osd_stick_overlay_radio_mode: '2', osd_gps_sats_show_pdop: 'ON',
           ...layout,
           ...(hideTxPower ? { osd_link_tx_power_pos: String(Number(layout.osd_link_tx_power_pos) & ~2048) } : {}),
+          ...(elrsSwap ? { osd_rssi_dbm_pos: String(Number(layout.osd_link_tx_power_pos) | 2048) } : {}),
           osd_camera_frame_width: '30', osd_camera_frame_height: '16',
         });
         if (hideTxPower) {
@@ -115,6 +125,22 @@ for (const entry of index.presets) {
           assert.equal(actualPosition & (7 << 11), 0, 'Control-transmitter power must be hidden');
           assert.equal(actualPosition & ~(7 << 11), savedPosition & ~(7 << 11), 'Preserve transmitter-power coordinates and display type');
           assert.equal(result.settings.osd_sys_lq_pos, layout.osd_sys_lq_pos, 'Preserve the DJI video-link indicator');
+        }
+        assert.equal(result.settings.osd_link_quality_pos, layout.osd_link_quality_pos, 'Keep link quality unchanged');
+        if (elrsSwap) {
+          const rssi = Number(result.settings.osd_rssi_dbm_pos);
+          const power = Number(layout.osd_link_tx_power_pos);
+          assert(rssi & 2048, 'Show RSSI dBm in OSD profile 1');
+          assert.equal(rssi & ~(7 << 11), power & ~(7 << 11), 'RSSI dBm must occupy the transmitter-power slot');
+          const x = (bits) => (bits & 31) | ((bits & 1024) >> 5);
+          const y = (bits) => (bits >> 5) & 31;
+          // Symbol, -130 and the :2 diversity suffix occupy at most seven cells.
+          const width = 7;
+          assert(x(rssi) + width <= 53, 'RSSI dBm extends beyond the HD canvas');
+          const lq = Number(result.settings.osd_link_quality_pos);
+          if ((lq & 2048) && y(lq) === y(rssi)) {
+            assert(x(rssi) + width <= x(lq), 'RSSI dBm must not overlap the unchanged link-quality field');
+          }
         }
         for (const [key, value] of Object.entries(result.settings)) {
           if (!key.endsWith('_pos')) continue;
