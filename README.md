@@ -2,7 +2,7 @@
 
 Small, focused presets for settings reused across a personal fleet. Each preset changes one part of the setup, so OSD preferences, rates, throttle response and switch assignments can be applied separately.
 
-These are **experimental personal presets for Betaflight 4.5.5**. The app groups them under firmware 4.5; compatibility with other versions has not been established. Values were extracted from saved configurations. The packaged presets have passed offline validation; they have not been applied to hardware or flight-tested as presets.
+These are **experimental personal presets for Betaflight 4.5.5**. The app groups them under firmware 4.5; compatibility with other versions has not been established. Values were extracted from saved configurations. Offline validation and the completed aircraft configuration checks are recorded below; goggles rendering, flight behavior and the complete Presets-tab workflow remain unverified by these checks.
 
 ## Add the source
 
@@ -46,6 +46,19 @@ The switch presets are alternatives. **Leave modes unchanged is the default and 
 | FlyLens85 | None | None |
 
 USER1 assignments are preserved without changing their names, PINIO settings or resources. Their hardware purpose must be verified separately. GPS Rescue assignments reproduce the saved switch mapping; they do not establish that Rescue is configured or flight-tested. These presets do not configure GPS, failsafe or Rescue parameters. The Pavo20-Pro snapshot predates its planned GPS installation. AUX1 is receiver channel 5, AUX2 is channel 6, and so on. Physical switch labels depend on the transmitter model.
+
+## Validation record
+
+Status as of **2026-11-15**. Results apply to the revisions and settings described, rather than every later version of a preset.
+
+| Date | Scope | Verified result | Limits |
+| --- | --- | --- | --- |
+| 2026-11-12 | Earlier HD fleet OSD base-layout payload on Helion 10 | All 81 commands accepted; 45 OSD fields changed. Unsaved comparison and saved/rebooted full readback matched expectations with zero unexpected differences. | CLI payload applied directly after processing with the pinned app parser. F6 option and later preset revisions were not covered by this full-payload check. |
+| 2026-11-13 | Corrected stick-overlay positions on Helion 10, F5, F6, Pavo20, Pavo20-Pro and FlyLens85 | Every saved/rebooted full aircraft readback showed exactly the two intended position changes and zero unexpected differences. | Only the two position commands were applied; this was not a full layout-preset application on all six aircraft. |
+| 2026-11-15 | All seven current presets | All 27 app-parser scenarios passed, including index hashes, command scope, exclusive choices and rate-profile isolation. GitHub validation passed. | Offline checks do not simulate firmware or establish hardware behavior. |
+| 2026-11-15 | Common timers, aircraft switch choices and post-flight statistics choices | Generated commands matched the corresponding settings in all six saved aircraft configurations from 2026-11-13, including the Helion statistics selection. | These newly packaged choices were not reapplied to aircraft during this comparison. |
+
+The complete Presets-tab application workflow, actual goggles appearance and flight behavior remain unverified by this record. Configuration readback establishes the saved settings, not their visual appearance or flight performance. Aircraft backups, identities and detailed bench evidence remain private outside this repository.
 
 ## Apply and verify
 
