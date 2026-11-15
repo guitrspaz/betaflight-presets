@@ -24,12 +24,23 @@ Enable the source and search for `guitrspaz`. Include **EXPERIMENTAL** in the st
 | [Post-flight statistics](presets/4.5/osd/post-flight-statistics.txt) | Statistics selection and average cell voltage. Pavo20 option also shows minimum link quality. |
 | [Actual fleet rates](presets/4.5/rates/actual-fleet-rates.txt) | Roll/pitch/yaw center sensitivity 190/190/200 degrees/second, maximum rates 720/720/630 degrees/second and expo 0.54/0.54/0.56. Existing rate caps still apply. |
 | [Throttle curve](presets/4.5/other/throttle-mid-expo.txt) | Midpoint 0.50 and expo 0.35. |
-| [Pavo switches](presets/4.5/modes/pavo-aux1-arm.txt) | AUX1 arm, AUX2 Angle, AUX3 prearm/turtle, AUX5 beeper. Optional GPS Rescue on AUX4 high. |
-| [DJI switches](presets/4.5/modes/dji-aux4-arm.txt) | AUX4 arm, AUX1 Angle, AUX2 prearm/turtle, AUX5 beeper. Optional GPS Rescue on AUX3 high. |
+| [Pavo / Helion switches](presets/4.5/modes/pavo-aux1-arm.txt) | Choose Helion-10, Pavo20 or Pavo20-Pro to restore its saved mode table. AUX1 arm, AUX2 Angle, AUX3 prearm/turtle, AUX5 beeper; includes existing Rescue and USER1 assignments where present. Default leaves modes unchanged. |
+| [DJI switches](presets/4.5/modes/dji-aux4-arm.txt) | Choose Evoque F5, Evoque F6 or FlyLens85 to restore its saved mode table. AUX4 arm, AUX1 Angle, AUX2 prearm/turtle, AUX5 beeper; includes existing Rescue and USER1 assignments where present. Default leaves modes unchanged. |
 
 Rates and throttle each offer destination profiles 1–4 and activate the selected profile. Profile 1 is the default. Select exactly one profile in each preset, using the same profile for both when they should work together.
 
-The switch presets are alternatives. **Each replaces all 20 mode ranges**, removing existing custom modes and GPS Rescue switch assignments. GPS Rescue is off by default in their options. Enable it only after configuring and verifying GPS Rescue on that aircraft; these presets do not configure failsafe or rescue behavior. AUX1 is receiver channel 5, AUX2 is channel 6, and so on. Physical switch labels depend on the transmitter model.
+The switch presets are alternatives. **Leave modes unchanged is the default and emits no commands.** Select exactly one matching aircraft to replace all 20 mode ranges with its saved table from 2026-11-13, including empty slots. These choices restore a snapshot; they do not merge with newer assignments. Reconcile later mode changes with a fresh backup before applying.
+
+| Aircraft choice | Saved GPS Rescue switch | Saved USER1 assignment |
+| --- | --- | --- |
+| Helion-10 | AUX4 high | AUX9, 900–2100 |
+| Pavo20 | AUX4 high | None |
+| Pavo20-Pro | None | None |
+| Evoque F5 | AUX3 high | AUX9, 900–2100 |
+| Evoque F6 | AUX3 high | AUX9, 900–2100 |
+| FlyLens85 | None | None |
+
+USER1 assignments are preserved without changing their names, PINIO settings or resources. Their hardware purpose must be verified separately. GPS Rescue assignments reproduce the saved switch mapping; they do not establish that Rescue is configured or flight-tested. These presets do not configure GPS, failsafe or Rescue parameters. The Pavo20-Pro snapshot predates its planned GPS installation. AUX1 is receiver channel 5, AUX2 is channel 6, and so on. Physical switch labels depend on the transmitter model.
 
 ## Apply and verify
 

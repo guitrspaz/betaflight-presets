@@ -154,7 +154,7 @@
   "presets": [
     {
       "fullPath": "presets/4.5/modes/dji-aux4-arm.txt",
-      "hash": "6f4d7b9c0d0b398e8350ba353cad0d5c360235dd38fb491f401e86a14bb2cbf4",
+      "hash": "79b8c12cb2af0e67b596642bd05e22bb16cc48d7e799ad2763a122f17a93460d",
       "title": "guitrspaz - DJI switches - AUX4 arm",
       "firmware_version": [
         "4.5"
@@ -172,8 +172,8 @@
     },
     {
       "fullPath": "presets/4.5/modes/pavo-aux1-arm.txt",
-      "hash": "a3c74253d05c83c8d9d07a932ba5b523ce7c6d220fd4b4d6e81cd69ea48c72ed",
-      "title": "guitrspaz - Pavo switches - AUX1 arm",
+      "hash": "495081059a7e69f54e5a67d2524823dfffa23b5b6cf63944f0f594c609d10162",
+      "title": "guitrspaz - Pavo / Helion switches - AUX1 arm",
       "firmware_version": [
         "4.5"
       ],

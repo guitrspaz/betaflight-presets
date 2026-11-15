@@ -1,37 +1,84 @@
-#$ TITLE: guitrspaz - Pavo switches - AUX1 arm
+#$ TITLE: guitrspaz - Pavo / Helion switches - AUX1 arm
 #$ FIRMWARE_VERSION: 4.5
 #$ CATEGORY: MODES
 #$ STATUS: EXPERIMENTAL
 #$ AUTHOR: guitrspaz
 #$ KEYWORDS: guitrspaz, fleet, personal
-#$ DESCRIPTION: Replaces ALL 20 mode ranges. Existing GPS Rescue, USER modes and other custom mode assignments are removed unless explicitly restored.
+#$ DESCRIPTION: Select the matching aircraft to restore its complete saved Betaflight 4.5.5 mode table from 2026-11-13. Leave modes unchanged is selected by default and emits no commands.
 #$ DESCRIPTION: AUX1 high: arm. AUX2 low/mid: Angle. AUX3 mid/high: prearm, high: turtle. AUX5 high: beeper. AUX1 means receiver channel 5; AUX2 means channel 6, and so on. Requires matching transmitter outputs and a working accelerometer for Angle.
-#$ DESCRIPTION: GPS Rescue on AUX4 high is optional and OFF by default. Enable it only on an aircraft with configured and verified GPS Rescue. Failsafe behavior and GPS Rescue parameters are not configured by this preset.
-#$ DESCRIPTION: Based on saved Betaflight 4.5.5 mode mappings. Physical switch names vary by radio model; confirm channels and ranges in Receiver and Modes with propellers removed.
-#$ WARNING: Replaces every mode range, including arming and GPS Rescue switch assignments. Confirm radio channel mapping, arm/prearm, beeper and turtle mode with propellers removed.
+#$ DESCRIPTION: Helion-10 and Pavo20 include GPS Rescue on AUX4 high. Helion-10 also includes its existing USER1 on AUX9 across 900-2100. Pavo20-Pro has no GPS Rescue assignment in this snapshot.
+#$ DESCRIPTION: Each aircraft choice replaces all 20 mode ranges, including empty slots. Later mode changes must be reconciled with a fresh backup before applying. USER1 assignments are preserved without changing their names, PINIO configuration or resources. GPS, failsafe and GPS Rescue parameters are not configured by this preset.
+#$ WARNING: Select only the matching aircraft. Replaces every mode range when an aircraft is selected. With propellers removed, confirm receiver channels, arm/prearm, beeper, turtle and Rescue switch assignments before flight. A saved Rescue assignment does not establish that Rescue is configured or flight-tested.
 #$ FORCE_OPTIONS_REVIEW: true
 
-aux 0 0 0 1700 2100 0 0
-aux 1 1 1 900 1700 0 0
-aux 2 36 2 1300 2100 0 0
-aux 3 35 2 1700 2100 0 0
-aux 4 13 4 1700 2100 0 0
-aux 5 0 0 900 900 0 0
-aux 6 0 0 900 900 0 0
-aux 7 0 0 900 900 0 0
-aux 8 0 0 900 900 0 0
-aux 9 0 0 900 900 0 0
-aux 10 0 0 900 900 0 0
-aux 11 0 0 900 900 0 0
-aux 12 0 0 900 900 0 0
-aux 13 0 0 900 900 0 0
-aux 14 0 0 900 900 0 0
-aux 15 0 0 900 900 0 0
-aux 16 0 0 900 900 0 0
-aux 17 0 0 900 900 0 0
-aux 18 0 0 900 900 0 0
-aux 19 0 0 900 900 0 0
-
-#$ OPTION BEGIN (UNCHECKED): Add GPS Rescue on AUX4 high
-    aux 5 46 3 1700 2100 0 0
-#$ OPTION END
+#$ OPTION_GROUP BEGIN: (EXCLUSIVE) Aircraft mode table
+    #$ OPTION BEGIN (CHECKED): Leave modes unchanged
+        # No mode commands until an aircraft is selected.
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Helion-10 (GPS Rescue + USER1)
+        aux 0 0 0 1700 2100 0 0
+        aux 1 1 1 900 1700 0 0
+        aux 2 40 8 900 2100 0 0
+        aux 3 36 2 1300 2100 0 0
+        aux 4 35 2 1700 2100 0 0
+        aux 5 13 4 1700 2100 0 0
+        aux 6 46 3 1700 2100 0 0
+        aux 7 0 0 900 900 0 0
+        aux 8 0 0 900 900 0 0
+        aux 9 0 0 900 900 0 0
+        aux 10 0 0 900 900 0 0
+        aux 11 0 0 900 900 0 0
+        aux 12 0 0 900 900 0 0
+        aux 13 0 0 900 900 0 0
+        aux 14 0 0 900 900 0 0
+        aux 15 0 0 900 900 0 0
+        aux 16 0 0 900 900 0 0
+        aux 17 0 0 900 900 0 0
+        aux 18 0 0 900 900 0 0
+        aux 19 0 0 900 900 0 0
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Pavo20 (GPS Rescue)
+        aux 0 0 0 1700 2100 0 0
+        aux 1 1 1 900 1700 0 0
+        aux 2 36 2 1300 2100 0 0
+        aux 3 35 2 1700 2100 0 0
+        aux 4 13 4 1700 2100 0 0
+        aux 5 46 3 1700 2100 0 0
+        aux 6 0 0 900 900 0 0
+        aux 7 0 0 900 900 0 0
+        aux 8 0 0 900 900 0 0
+        aux 9 0 0 900 900 0 0
+        aux 10 0 0 900 900 0 0
+        aux 11 0 0 900 900 0 0
+        aux 12 0 0 900 900 0 0
+        aux 13 0 0 900 900 0 0
+        aux 14 0 0 900 900 0 0
+        aux 15 0 0 900 900 0 0
+        aux 16 0 0 900 900 0 0
+        aux 17 0 0 900 900 0 0
+        aux 18 0 0 900 900 0 0
+        aux 19 0 0 900 900 0 0
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Pavo20-Pro (no GPS Rescue)
+        aux 0 0 0 1700 2100 0 0
+        aux 1 1 1 900 1700 0 0
+        aux 2 36 2 1300 2100 0 0
+        aux 3 35 2 1700 2100 0 0
+        aux 4 13 4 1700 2100 0 0
+        aux 5 0 0 900 900 0 0
+        aux 6 0 0 900 900 0 0
+        aux 7 0 0 900 900 0 0
+        aux 8 0 0 900 900 0 0
+        aux 9 0 0 900 900 0 0
+        aux 10 0 0 900 900 0 0
+        aux 11 0 0 900 900 0 0
+        aux 12 0 0 900 900 0 0
+        aux 13 0 0 900 900 0 0
+        aux 14 0 0 900 900 0 0
+        aux 15 0 0 900 900 0 0
+        aux 16 0 0 900 900 0 0
+        aux 17 0 0 900 900 0 0
+        aux 18 0 0 900 900 0 0
+        aux 19 0 0 900 900 0 0
+    #$ OPTION END
+#$ OPTION_GROUP END

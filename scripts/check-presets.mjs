@@ -72,13 +72,21 @@ for (const entry of index.presets) {
     } else if (name.startsWith('modes/')) {
       assert.deepEqual(result.settings, {});
       assert.equal(result.selected, null);
-      assert.equal(result.modes.size, 20, 'All stale mode ranges must be replaced');
+      result.profiles.forEach((profile) => assert.deepEqual(profile, {}));
       const variant = name.slice('modes/'.length, -4);
-      const expected = Array.from({ length: 20 }, (_, i) => `aux ${i} 0 0 900 900 0 0`);
-      for (const line of reference.modes[variant]) expected[Number(line.split(' ')[1])] = line;
-      if (checked.length) expected[5] = `aux 5 46 ${variant === 'pavo-aux1-arm' ? 3 : 2} 1700 2100 0 0`;
-      assert.deepEqual([...result.modes.values()], expected);
-      assert.equal([...result.modes.values()].filter((line) => /^aux \d+ 0 \d+ 1700 2100/.test(line)).length, 1, 'Exactly one arm range');
+      assert(group, 'Aircraft choices must be exclusive');
+      assert.deepEqual(group.childs.map((option) => option.name), ['Leave modes unchanged', ...Object.keys(reference.modes[variant])]);
+      assert.equal(group.childs.find((option) => option.checked).name, 'Leave modes unchanged', 'Default must not select an aircraft');
+      if (!checked.length || checked[0] === 'Leave modes unchanged') {
+        assert.equal(cli.length, 0, 'No aircraft choice must leave all modes unchanged');
+      } else {
+        const expected = reference.modes[variant][checked[0]];
+        assert.equal(cli.length, 20, 'Emit exactly one command for each mode slot');
+        assert.equal(result.modes.size, 20, 'Replace the complete saved mode table');
+        assert.deepEqual([...result.modes.keys()], Array.from({ length: 20 }, (_, i) => i));
+        assert.deepEqual([...result.modes.values()], expected, `Saved assignments differ for ${checked[0]}`);
+        assert.equal(cli.filter((line) => /^aux \d+ 0 \d+ 1700 2100/.test(line)).length, 1, 'Exactly one arm range');
+      }
     } else {
       assert.equal(result.selected, null);
       assert.equal(result.modes.size, 0);
