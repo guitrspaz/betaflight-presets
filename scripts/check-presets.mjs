@@ -84,7 +84,7 @@ for (const entry of index.presets) {
       assert.equal(result.modes.size, 0);
       if (name === 'osd/hd-fleet-layout.txt') {
         assert.deepEqual(result.settings, {
-          osd_units: 'IMPERIAL', osd_profile: '1',
+          osd_units: 'IMPERIAL', osd_profile: '1', osd_stick_overlay_radio_mode: '2',
           ...(checked.length ? reference.f6Layout : reference.baseLayout),
           osd_camera_frame_width: '30', osd_camera_frame_height: '16',
         });
@@ -95,6 +95,11 @@ for (const entry of index.presets) {
           const y = (bits >> 5) & 31;
           assert(x < 53 && y < 20, `OSD element outside 53 x 20 canvas: ${key}`);
         }
+        const left = Number(result.settings.osd_stick_overlay_left_pos);
+        const right = Number(result.settings.osd_stick_overlay_right_pos);
+        const column = (bits) => (bits & 31) | ((bits & 1024) >> 5);
+        assert(column(left) < column(right), 'Left stick overlay must be left of the right stick overlay');
+        assert.equal((left >> 5) & 31, (right >> 5) & 31, 'Stick overlays must share a row');
       } else {
         assert.equal(name, 'osd/post-flight-statistics.txt', 'Unrecognized preset scope');
         assert.deepEqual(result.settings, { osd_stat_bitmask: checked.length ? reference.statistics.pavo : reference.statistics.base, osd_stat_avg_cell_value: 'ON' });
