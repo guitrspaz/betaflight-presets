@@ -53,7 +53,8 @@ for (const entry of index.presets) {
   const preset = { ...entry };
   parser.readPresetProperties(preset, lines);
   const group = preset.options.find((option) => option.isExclusive);
-  const choices = group ? [[], ...group.childs.map((option) => [option.name])] : [[], ...preset.options.map((option) => [option.name])];
+  const choices = group ? [[], ...group.childs.map((option) => [option.name])] : preset.options.reduce(
+    (combinations, option) => [...combinations, ...combinations.map((checked) => [...checked, option.name])], [[]]);
   if (group) assert.equal(group.childs.filter((option) => option.checked).length, 1);
   for (const checked of choices) {
     const cli = commands(lines, checked);
@@ -98,11 +99,23 @@ for (const entry of index.presets) {
       assert.equal(result.selected, null);
       assert.equal(result.modes.size, 0);
       if (name === 'osd/hd-fleet-layout.txt') {
+        assert.deepEqual(preset.options.map((option) => option.name), ['F6 display variant', 'DJI control - hide transmitter power']);
+        assert(preset.options.every((option) => !option.checked), 'Layout variants must remain opt-in');
+        const layout = checked.includes('F6 display variant') ? reference.f6Layout : reference.baseLayout;
+        const hideTxPower = checked.includes('DJI control - hide transmitter power');
         assert.deepEqual(result.settings, {
           osd_units: 'IMPERIAL', osd_profile: '1', osd_stick_overlay_radio_mode: '2',
-          ...(checked.length ? reference.f6Layout : reference.baseLayout),
+          ...layout,
+          ...(hideTxPower ? { osd_link_tx_power_pos: String(Number(layout.osd_link_tx_power_pos) & ~2048) } : {}),
           osd_camera_frame_width: '30', osd_camera_frame_height: '16',
         });
+        if (hideTxPower) {
+          const actualPosition = Number(result.settings.osd_link_tx_power_pos);
+          const savedPosition = Number(layout.osd_link_tx_power_pos);
+          assert.equal(actualPosition & (7 << 11), 0, 'Control-transmitter power must be hidden');
+          assert.equal(actualPosition & ~(7 << 11), savedPosition & ~(7 << 11), 'Preserve transmitter-power coordinates and display type');
+          assert.equal(result.settings.osd_sys_lq_pos, layout.osd_sys_lq_pos, 'Preserve the DJI video-link indicator');
+        }
         for (const [key, value] of Object.entries(result.settings)) {
           if (!key.endsWith('_pos')) continue;
           const bits = Number(value);
