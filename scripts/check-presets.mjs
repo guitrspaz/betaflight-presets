@@ -128,6 +128,7 @@ for (const entry of index.presets) {
         const variants = {
           'Base statistics (F5, F6, FlyLens85)': reference.statistics.base,
           'Pavo20 post-flight statistics variant': reference.statistics.pavo,
+          'Pavo - add minimum RSSI dBm': reference.statistics.pavoRssiDbm,
           'Helion - current statistics': reference.statistics.helion,
         };
         assert(group, 'Statistics choices must be exclusive');
@@ -140,6 +141,13 @@ for (const entry of index.presets) {
         } else {
           assert.equal(cli.length, 2, 'Change only the statistics mask and average cell voltage');
           assert.deepEqual(result.settings, { osd_stat_bitmask: variants[checked[0]], osd_stat_avg_cell_value: 'ON' });
+          if (checked[0] === 'Pavo - add minimum RSSI dBm') {
+            const mask = Number(result.settings.osd_stat_bitmask);
+            const savedPavo = Number(reference.statistics.pavo);
+            assert.equal(mask ^ savedPavo, 1 << 23, 'Optional Pavo choice must change only the minimum RSSI dBm bit');
+            assert(mask & (1 << 23), 'Minimum RSSI dBm must be enabled');
+            assert.equal(mask & savedPavo, savedPavo, 'Preserve every saved Pavo statistic');
+          }
           if (checked[0] === 'Helion - current statistics') {
             const mask = Number(result.settings.osd_stat_bitmask);
             for (const bit of [12, 13, 17, 23, 25]) assert(mask & (1 << bit), 'Preserve Helion Blackbox and minimum link statistics');

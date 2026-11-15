@@ -165,6 +165,7 @@
   "statistics": {
     "base": "19156604",
     "pavo": "19287676",
+    "pavoRssiDbm": "27676284",
     "helion": "59129468"
   },
   "rates": {
