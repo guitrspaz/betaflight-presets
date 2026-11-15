@@ -104,7 +104,7 @@ for (const entry of index.presets) {
         const layout = checked.includes('F6 display variant') ? reference.f6Layout : reference.baseLayout;
         const hideTxPower = checked.includes('DJI control - hide transmitter power');
         assert.deepEqual(result.settings, {
-          osd_units: 'IMPERIAL', osd_profile: '1', osd_stick_overlay_radio_mode: '2',
+          osd_units: 'IMPERIAL', osd_profile: '1', osd_stick_overlay_radio_mode: '2', osd_gps_sats_show_pdop: 'ON',
           ...layout,
           ...(hideTxPower ? { osd_link_tx_power_pos: String(Number(layout.osd_link_tx_power_pos) & ~2048) } : {}),
           osd_camera_frame_width: '30', osd_camera_frame_height: '16',
