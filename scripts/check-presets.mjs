@@ -108,6 +108,14 @@ for (const entry of index.presets) {
         const column = (bits) => (bits & 31) | ((bits & 1024) >> 5);
         assert(column(left) < column(right), 'Left stick overlay must be left of the right stick overlay');
         assert.equal((left >> 5) & 31, (right >> 5) & 31, 'Stick overlays must share a row');
+      } else if (name === 'osd/common-osd-timers.txt') {
+        assert.equal(cli.length, 2, 'Timer preset must emit only the two timer definitions');
+        assert.equal(preset.options.length, 0, 'Common timers have no aircraft-specific options');
+        result.profiles.forEach((profile) => assert.deepEqual(profile, {}));
+        assert.deepEqual(result.settings, reference.timers);
+        const decodeTimer = (value) => ({ source: Number(value) & 15, precision: (Number(value) >> 4) & 15, alarmMinutes: (Number(value) >> 8) & 255 });
+        assert.deepEqual(decodeTimer(result.settings.osd_tim1), { source: 0, precision: 0, alarmMinutes: 10 }, 'Timer 1: power-on time, whole seconds, 10-minute alarm');
+        assert.deepEqual(decodeTimer(result.settings.osd_tim2), { source: 1, precision: 0, alarmMinutes: 0 }, 'Timer 2: total armed time, whole seconds, no alarm');
       } else {
         assert.equal(name, 'osd/post-flight-statistics.txt', 'Unrecognized preset scope');
         assert.deepEqual(result.settings, { osd_stat_bitmask: checked.length ? reference.statistics.pavo : reference.statistics.base, osd_stat_avg_cell_value: 'ON' });

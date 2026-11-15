@@ -158,6 +158,10 @@
     "osd_sys_vtx_temp_pos": "3214",
     "osd_sys_fan_speed_pos": "234"
   },
+  "timers": {
+    "osd_tim1": "2560",
+    "osd_tim2": "1"
+  },
   "statistics": {
     "base": "19156604",
     "pavo": "19287676"

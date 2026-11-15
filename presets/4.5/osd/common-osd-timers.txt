@@ -1,0 +1,12 @@
+#$ TITLE: guitrspaz - Common OSD timers
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OSD
+#$ STATUS: EXPERIMENTAL
+#$ AUTHOR: guitrspaz
+#$ KEYWORDS: guitrspaz, fleet, personal, timers
+#$ DESCRIPTION: Reproduces the timer definitions shared by all six saved Betaflight 4.5.5 aircraft configurations from 2026-11-13.
+#$ DESCRIPTION: Timer 1 counts time since flight-controller power-on, including time on the ground, with a 10-minute visual alarm. Timer 2 counts total armed time since power-on, accumulating across disarming and rearming, with no timer alarm. Both display minutes and whole seconds.
+#$ DESCRIPTION: Changes only the two timer definitions. Timer positions and visibility, OSD layout, statistics selection and other settings remain unchanged.
+
+set osd_tim1 = 2560
+set osd_tim2 = 1

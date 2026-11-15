@@ -148,7 +148,8 @@
     "keywords": [
       "fleet",
       "guitrspaz",
-      "personal"
+      "personal",
+      "timers"
     ]
   },
   "presets": [
@@ -186,6 +187,24 @@
         "personal"
       ],
       "force_options_review": true,
+      "priority": 0
+    },
+    {
+      "fullPath": "presets/4.5/osd/common-osd-timers.txt",
+      "hash": "95fd58af4d149135a21c8115383e8a03b01aef6815e5159713b01f37b206eb48",
+      "title": "guitrspaz - Common OSD timers",
+      "firmware_version": [
+        "4.5"
+      ],
+      "category": "OSD",
+      "status": "EXPERIMENTAL",
+      "author": "guitrspaz",
+      "keywords": [
+        "guitrspaz",
+        "fleet",
+        "personal",
+        "timers"
+      ],
       "priority": 0
     },
     {
