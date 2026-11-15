@@ -25,7 +25,7 @@ Enable the source and search for `guitrspaz`. Include **EXPERIMENTAL** in the st
 | [Actual fleet rates](presets/4.5/rates/actual-fleet-rates.txt) | Roll/pitch/yaw center sensitivity 190/190/200 degrees/second, maximum rates 720/720/630 degrees/second and expo 0.54/0.54/0.56. Existing rate caps still apply. |
 | [Throttle curve](presets/4.5/other/throttle-mid-expo.txt) | Midpoint 0.50 and expo 0.35. |
 | [Pavo switches](presets/4.5/modes/pavo-aux1-arm.txt) | AUX1 arm, AUX2 Angle, AUX3 prearm/turtle, AUX5 beeper. Optional GPS Rescue on AUX4 high. |
-| [Boxer switches](presets/4.5/modes/boxer-aux4-arm.txt) | AUX4 arm, AUX1 Angle, AUX2 prearm/turtle, AUX5 beeper. Optional GPS Rescue on AUX3 high. |
+| [DJI switches](presets/4.5/modes/dji-aux4-arm.txt) | AUX4 arm, AUX1 Angle, AUX2 prearm/turtle, AUX5 beeper. Optional GPS Rescue on AUX3 high. |
 
 Rates and throttle each offer destination profiles 1–4 and activate the selected profile. Profile 1 is the default. Select exactly one profile in each preset, using the same profile for both when they should work together.
 

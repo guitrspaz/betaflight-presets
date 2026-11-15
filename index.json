@@ -153,9 +153,9 @@
   },
   "presets": [
     {
-      "fullPath": "presets/4.5/modes/boxer-aux4-arm.txt",
-      "hash": "00fe070de577a8c9cbaa73e18f58399b95a236770cd25011397e0b14b74285de",
-      "title": "guitrspaz - Boxer switches - AUX4 arm",
+      "fullPath": "presets/4.5/modes/dji-aux4-arm.txt",
+      "hash": "6f4d7b9c0d0b398e8350ba353cad0d5c360235dd38fb491f401e86a14bb2cbf4",
+      "title": "guitrspaz - DJI switches - AUX4 arm",
       "firmware_version": [
         "4.5"
       ],
