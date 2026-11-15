@@ -54,6 +54,27 @@ The switch presets are alternatives. **Leave modes unchanged is the default and 
 
 USER1 assignments are preserved without changing their names, PINIO settings or resources. Their hardware purpose must be verified separately. GPS Rescue assignments reproduce the saved switch mapping; they do not establish that Rescue is configured or flight-tested. These presets do not configure GPS, failsafe or Rescue parameters. The Pavo20-Pro snapshot predates its planned GPS installation. AUX1 is receiver channel 5, AUX2 is channel 6, and so on. Physical switch labels depend on the transmitter model.
 
+## Per-aircraft selections
+
+Approved choices as of **2026-11-15**. The pending column lists approved changes still awaiting aircraft application and goggles verification. Use a fresh backup to reconcile later changes before applying a saved preset.
+
+Use the common base HD layout for all six aircraft below, with Legacy F6 display variant unchecked, including on the current F6. The control-link and statistics names in this table match the options shown in the app. Select the aircraft switch choice only when restoring its saved mode table; ordinary OSD updates do not require reapplying modes.
+
+| Aircraft | Switch preset and aircraft choice | HD control-link display choice | Post-flight statistics choice | Approved changes awaiting application |
+| --- | --- | --- | --- | --- |
+| Helion-10 | Pavo / Helion switches → Helion-10 (GPS Rescue + USER1) | ELRS - RSSI dBm instead of transmitter power | Helion - current statistics | ELRS live RSSI dBm swap |
+| Pavo20 | Pavo / Helion switches → Pavo20 (GPS Rescue) | ELRS - RSSI dBm instead of transmitter power | Pavo - add minimum RSSI dBm | ELRS live RSSI dBm swap and added minimum RSSI dBm statistic |
+| Pavo20-Pro | Pavo / Helion switches → Pavo20-Pro (no GPS Rescue) | ELRS - RSSI dBm instead of transmitter power | Pavo - add minimum RSSI dBm | ELRS live RSSI dBm swap and added minimum RSSI dBm statistic |
+| Evoque F5 | DJI switches → Evoque F5 (GPS Rescue + USER1) | DJI control - hide transmitter power | Base statistics (F5, F6, FlyLens85) | DJI transmitter-power cleanup |
+| Evoque F6 | DJI switches → Evoque F6 (GPS Rescue + USER1) | DJI control - hide transmitter power | Base statistics (F5, F6, FlyLens85) | DJI transmitter-power cleanup |
+| FlyLens85 | DJI switches → FlyLens85 (no GPS Rescue or USER1) | DJI control - hide transmitter power | Base statistics (F5, F6, FlyLens85) | DJI transmitter-power cleanup |
+
+All six saved aircraft already match Common OSD timers and have show-PDOP enabled. Their corrected Mode 2 stick positions were saved and read back on 2026-11-13. Actual fleet rates and Throttle curve can be selected separately; the saved fleet uses profile 1 (CLI 0), and both presets should target the same intended profile.
+
+Galileo is already ON in the saved Helion, F5, F6 and Pavo20 configurations. FlyLens85 was changed to ON and its saved FC setting verified on 2026-11-15; module acceptance and outdoor improvement remain unverified. The Pavo20-Pro snapshot has GPS disabled and no Rescue switch assignment. Revisit its recipe after GPS installation and configuration, using a fresh backup.
+
+AcroBee65 has no recipe in this HD table. Its firmware, factory backup and analog OSD layout need checking before adding compatible presets; no GPS is planned for it.
+
 ## Validation record
 
 Status as of **2026-11-15**. Results apply to the revisions and settings described, rather than every later version of a preset.
