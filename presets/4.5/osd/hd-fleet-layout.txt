@@ -6,7 +6,7 @@
 #$ KEYWORDS: guitrspaz, fleet, personal
 #$ DESCRIPTION: For an already working 53 x 20 HD MSP DisplayPort OSD on Betaflight 4.5.5. UARTs and video transport must already be configured.
 #$ DESCRIPTION: Sets imperial units, selects OSD profile 1, replaces every element position and its visibility across all three OSD profiles, sets the camera frame dimensions, and shows the GPS PDOP estimate beside satellite count as in all six saved aircraft. Existing OSD profile names remain.
-#$ DESCRIPTION: The base layout matches the saved F5, FlyLens 85 and Pavo20 layouts. The F6 option changes link quality, transmitter power, G-force, ready mode and remaining-time visibility to the saved F6 variant.
+#$ DESCRIPTION: The base layout matches the saved F5, FlyLens 85 and Pavo20 layouts, and the latest saved F6 layout from 2026-11-13. Legacy F6 display variant preserves an older arrangement that changes link quality, transmitter power, G-force, ready mode and remaining-time visibility. Select it only when that older arrangement is wanted.
 #$ DESCRIPTION: Control-link display choices are exclusive. Keep layout control-link display is selected by default and adds no overrides. DJI control - hide transmitter power hides only the control-transmitter power field for F5, F6 and FlyLens85 using DJI/SBUS. ELRS - RSSI dBm instead of transmitter power replaces that readout in the same slot for Helion-10, Pavo20 and Pavo20-Pro. Link quality, DJI video-link indicator, alarm thresholds and all other fields remain as in the chosen layout. The full layout-preset scope still applies.
 #$ DESCRIPTION: Battery alarms, warning masks, timer definitions, post-flight statistics and sensor configuration remain aircraft-specific. GPS and current-related elements require working sensors.
 #$ WARNING: For 53 x 20 HD only. Back up all OSD profiles before applying; their element visibility will be replaced.
@@ -96,7 +96,7 @@ set osd_sys_fan_speed_pos = 234
 set osd_camera_frame_width = 30
 set osd_camera_frame_height = 16
 
-#$ OPTION BEGIN (UNCHECKED): F6 display variant
+#$ OPTION BEGIN (UNCHECKED): Legacy F6 display variant
     set osd_link_quality_pos = 1070
     set osd_link_tx_power_pos = 1063
     set osd_remaining_time_estimate_pos = 2273
@@ -106,7 +106,7 @@ set osd_camera_frame_height = 16
 
 #$ OPTION_GROUP BEGIN: (EXCLUSIVE) Control-link display
     #$ OPTION BEGIN (CHECKED): Keep layout control-link display
-        # No overrides to the selected base or F6 layout.
+        # No overrides to the selected base or legacy F6 layout.
     #$ OPTION END
     #$ OPTION BEGIN (UNCHECKED): DJI control - hide transmitter power
         set osd_link_tx_power_pos = 1063

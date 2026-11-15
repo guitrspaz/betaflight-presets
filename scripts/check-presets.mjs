@@ -104,12 +104,12 @@ for (const entry of index.presets) {
       assert.equal(result.selected, null);
       assert.equal(result.modes.size, 0);
       if (name === 'osd/hd-fleet-layout.txt') {
-        assert.deepEqual(preset.options.map((option) => option.name), ['F6 display variant', 'Control-link display']);
-        assert.equal(preset.options[0].checked, false, 'F6 layout must remain opt-in');
+        assert.deepEqual(preset.options.map((option) => option.name), ['Legacy F6 display variant', 'Control-link display']);
+        assert.equal(preset.options[0].checked, false, 'Legacy F6 layout must remain opt-in');
         assert(group, 'Control-link overrides must be exclusive');
         assert.deepEqual(group.childs.map((option) => option.name), ['Keep layout control-link display', 'DJI control - hide transmitter power', 'ELRS - RSSI dBm instead of transmitter power']);
         assert.equal(group.childs.find((option) => option.checked).name, 'Keep layout control-link display', 'Default must retain existing control-link fields');
-        const layout = checked.includes('F6 display variant') ? reference.f6Layout : reference.baseLayout;
+        const layout = checked.includes('Legacy F6 display variant') ? reference.f6Layout : reference.baseLayout;
         const elrsSwap = checked.includes('ELRS - RSSI dBm instead of transmitter power');
         const hideTxPower = checked.includes('DJI control - hide transmitter power') || elrsSwap;
         assert.deepEqual(result.settings, {
