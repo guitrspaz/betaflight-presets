@@ -22,11 +22,13 @@ Enable the source and search for `guitrspaz`. Include **EXPERIMENTAL** in the st
 | --- | --- |
 | [HD fleet OSD layout](presets/4.5/osd/hd-fleet-layout.txt) | Imperial units and the saved HD layout. Selects OSD profile 1 and replaces element positions and visibility across all three OSD profiles. Optional F6 display variant. Requires an already working 53 × 20 HD MSP DisplayPort setup. |
 | [Common OSD timers](presets/4.5/osd/common-osd-timers.txt) | Timer 1: power-on time with a 10-minute visual alarm. Timer 2: total armed time since power-on, accumulating across rearming, with no timer alarm. Both use minutes:seconds. Positions and visibility remain unchanged. |
-| [Post-flight statistics](presets/4.5/osd/post-flight-statistics.txt) | Statistics selection and average cell voltage. Pavo20 option also shows minimum link quality. |
+| [Post-flight statistics](presets/4.5/osd/post-flight-statistics.txt) | Mutually exclusive saved selections: base (F5/F6/FlyLens85, default), Pavo20 (also matches Pavo20-Pro), or Helion. Each enables average cell voltage. Helion preserves its minimum link quality, RSSI dBm, signal-to-noise and Blackbox fields. |
 | [Actual fleet rates](presets/4.5/rates/actual-fleet-rates.txt) | Roll/pitch/yaw center sensitivity 190/190/200 degrees/second, maximum rates 720/720/630 degrees/second and expo 0.54/0.54/0.56. Existing rate caps still apply. |
 | [Throttle curve](presets/4.5/other/throttle-mid-expo.txt) | Midpoint 0.50 and expo 0.35. |
 | [Pavo / Helion switches](presets/4.5/modes/pavo-aux1-arm.txt) | Choose Helion-10, Pavo20 or Pavo20-Pro to restore its saved mode table. AUX1 arm, AUX2 Angle, AUX3 prearm/turtle, AUX5 beeper; includes existing Rescue and USER1 assignments where present. Default leaves modes unchanged. |
 | [DJI switches](presets/4.5/modes/dji-aux4-arm.txt) | Choose Evoque F5, Evoque F6 or FlyLens85 to restore its saved mode table. AUX4 arm, AUX1 Angle, AUX2 prearm/turtle, AUX5 beeper; includes existing Rescue and USER1 assignments where present. Default leaves modes unchanged. |
+
+The statistics choices reproduce the saved selections from 2026-11-13. Select the matching choice; base is selected by default, and clearing all choices emits no commands. The Helion choice also preserves its existing omission of the lifetime Total Flight Time field. Available fields depend on firmware features and working telemetry or logging. This preset changes the summary after disarming; in-flight OSD positions, visibility, warnings and timers remain unchanged.
 
 The timer preset reproduces the definitions shared by all six saved aircraft configurations from 2026-11-13. Apply it separately from the layout when those timer meanings are desired. Timer 1 includes ground time; its alarm is based on power-on time. Timer 2 pauses while disarmed and resumes when rearmed. Both timers reset when the flight controller restarts.
 

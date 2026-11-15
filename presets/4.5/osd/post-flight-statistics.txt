@@ -5,12 +5,22 @@
 #$ AUTHOR: guitrspaz
 #$ KEYWORDS: guitrspaz, fleet, personal
 #$ DESCRIPTION: Replaces the post-flight statistics selection and enables average cell voltage. Extracted from saved Betaflight 4.5.5 configurations.
-#$ DESCRIPTION: Base mask is 19156604 from F5, F6 and FlyLens 85. Select the Pavo20 option to add minimum link quality (mask 19287676). OSD layout and warning settings remain unchanged.
+#$ DESCRIPTION: Select one statistics choice. Base statistics (selected by default) reproduces F5, F6 and FlyLens85 with mask 19156604. The Pavo20 choice adds minimum link quality with mask 19287676, also matching the saved Pavo20-Pro selection. With no choice selected, no commands are emitted.
+#$ DESCRIPTION: Helion - current statistics reproduces its saved 2026-11-13 selection exactly (mask 59129468), including minimum link quality, minimum RSSI dBm, minimum signal-to-noise ratio, Blackbox status and log number. Like the saved Helion selection, it omits the lifetime Total Flight Time field. Field availability depends on firmware features and working telemetry or logging.
+#$ DESCRIPTION: Changes only statistics selection and average cell voltage. In-flight OSD layout, warning settings, timers and other configuration remain unchanged.
 #$ FORCE_OPTIONS_REVIEW: true
 
-set osd_stat_bitmask = 19156604
-set osd_stat_avg_cell_value = ON
-
-#$ OPTION BEGIN (UNCHECKED): Pavo20 post-flight statistics variant
-    set osd_stat_bitmask = 19287676
-#$ OPTION END
+#$ OPTION_GROUP BEGIN: (EXCLUSIVE) Post-flight statistics selection
+    #$ OPTION BEGIN (CHECKED): Base statistics (F5, F6, FlyLens85)
+        set osd_stat_bitmask = 19156604
+        set osd_stat_avg_cell_value = ON
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Pavo20 post-flight statistics variant
+        set osd_stat_bitmask = 19287676
+        set osd_stat_avg_cell_value = ON
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Helion - current statistics
+        set osd_stat_bitmask = 59129468
+        set osd_stat_avg_cell_value = ON
+    #$ OPTION END
+#$ OPTION_GROUP END

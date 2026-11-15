@@ -118,7 +118,27 @@ for (const entry of index.presets) {
         assert.deepEqual(decodeTimer(result.settings.osd_tim2), { source: 1, precision: 0, alarmMinutes: 0 }, 'Timer 2: total armed time, whole seconds, no alarm');
       } else {
         assert.equal(name, 'osd/post-flight-statistics.txt', 'Unrecognized preset scope');
-        assert.deepEqual(result.settings, { osd_stat_bitmask: checked.length ? reference.statistics.pavo : reference.statistics.base, osd_stat_avg_cell_value: 'ON' });
+        const variants = {
+          'Base statistics (F5, F6, FlyLens85)': reference.statistics.base,
+          'Pavo20 post-flight statistics variant': reference.statistics.pavo,
+          'Helion - current statistics': reference.statistics.helion,
+        };
+        assert(group, 'Statistics choices must be exclusive');
+        assert.deepEqual(group.childs.map((option) => option.name), Object.keys(variants));
+        assert.equal(group.childs.find((option) => option.checked).name, 'Base statistics (F5, F6, FlyLens85)', 'Keep the existing base statistics as the default');
+        result.profiles.forEach((profile) => assert.deepEqual(profile, {}));
+        if (!checked.length) {
+          assert.equal(cli.length, 0, 'No statistics choice must leave settings unchanged');
+          assert.deepEqual(result.settings, {});
+        } else {
+          assert.equal(cli.length, 2, 'Change only the statistics mask and average cell voltage');
+          assert.deepEqual(result.settings, { osd_stat_bitmask: variants[checked[0]], osd_stat_avg_cell_value: 'ON' });
+          if (checked[0] === 'Helion - current statistics') {
+            const mask = Number(result.settings.osd_stat_bitmask);
+            for (const bit of [12, 13, 17, 23, 25]) assert(mask & (1 << bit), 'Preserve Helion Blackbox and minimum link statistics');
+            assert.equal(mask & (1 << 21), 0, 'Preserve Helion omission of lifetime Total Flight Time');
+          }
+        }
       }
     }
     scenarios++;
